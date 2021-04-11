@@ -1,11 +1,33 @@
 const Login = require('../model/login')
 
+
 var express = require('express');
 var router = express.Router();
-
+const cors = require('cors')
+//cors跨域
+router.use(cors())
 /* GET home page. */
-router.get('/login', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+
+router.post('/getUserInfo', (req, res) => {
+  // var username = req.body.username;
+  // var password = req.body.password;
+  // Login.find({ username, password }).then(mon => {
+  //   if (mon.length > 0) {
+  //     res.cookie('username', req.body.username)
+  //     res.json({
+  //       code: 200,
+  //       msg: "登陆成功"
+  //     })
+  //   } else {
+      res.json({
+        code: 101,
+        msg: "用户名或者密码不正确"
+      })
+  //   }
+  // })
+})
 
 module.exports = router;
