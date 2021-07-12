@@ -1,5 +1,5 @@
 const Login = require('../model/login')
-
+const fs = require('fs')
 
 var express = require('express');
 var router = express.Router();
@@ -8,7 +8,7 @@ const cors = require('cors')
 router.use(cors())
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '白茶清风无别事，我等风亦等自己' });
 });
 
 router.post('/getUserInfo', (req, res) => {
