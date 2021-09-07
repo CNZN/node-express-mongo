@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-04-07 20:42:40
+ * @LastEditTime: 2021-08-31 21:00:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \node-express-mongo\routes\index.js
+ */
 const Login = require('../model/login')
 const fs = require('fs')
 
@@ -22,12 +30,28 @@ router.post('/getUserInfo', (req, res) => {
   //       msg: "登陆成功"
   //     })
   //   } else {
+      // res.json({
+      //   code: 101,
+      //   msg: "用户名或者密码不正确"
+      // })
       res.json({
-        code: 101,
-        msg: "用户名或者密码不正确"
+        code: 200,
+        list:[1,2,3,4]
       })
   //   }
   // })
+})
+router.post('/getList', (req,res)=> {
+  res.json({
+    code: 200,
+    list:[{id:1},{id:2},{id:3},{id:4}]
+  })
+})
+router.post('/getCount', (req,res)=> {
+  res.json({
+    code: 200,
+    data: 99
+  })
 })
 
 module.exports = router;

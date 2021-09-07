@@ -1,0 +1,59 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-08-26 22:16:07
+ * @LastEditTime: 2021-08-26 22:16:08
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \node-express-mongo\demo.html
+-->
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+    <script src="http://www.yanhuangxueyuan.com/threejs/build/three.js"></script>
+    <script src="http://www.yanhuangxueyuan.com/threejs/examples/js/controls/OrbitControls.js"></script>
+		<script>
+    	//创建一个场景
+			var scene = new THREE.Scene();
+      //three.js里有几种不同的相机，在这里，我们使用的是PerspectiveCamera（透视摄像机）
+      //第一个属性是视野角度（FOV）。视野角度就是无论在什么时候，你所能在显示器上看到的场景的范围，它的值是一个角度。
+      //第二个值是长宽比（aspect ratio）。 也就是你用一个物体的宽除以它的高的比值。比如说，当你在一个宽屏电视上播放老电影时，可以看到图像仿佛是被压扁的。
+      //远剪切面
+      //近剪切面
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			//接下来是渲染器。这里是施展魔法的地方
+			var renderer = new THREE.WebGLRenderer();
+      //设置一个渲染器的大小尺寸
+			renderer.setSize( window.innerWidth, window.innerHeight );
+      //元素添加到我们的HTML文档中，这也就是渲染器使用<canvas>元素来将场景展现
+			document.body.appendChild( renderer.domElement );
+			//要创建一个立方体，我们需要一个BoxGeometry（立方体）对象.
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      //，对于这个立方体，我们需要给它一个材质，来让它有颜色
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+      //我们需要一个Mesh（网格）
+			var cube = new THREE.Mesh( geometry, material );
+      //当我们调用scene.add()的时候，物体将会被添加到坐标为(0,0,0)的位置
+			scene.add( cube );
+			//但这可能会使得摄像机的位置和立方体相互重叠（也就是摄像机位于立方体中）。为了防止这种情况的发生，我们只需要将摄像机稍微向外移动一些即可
+			camera.position.z = 5;
+			//调用一个被叫做“渲染”或者“动画循环”的东西
+			var animate = function () {
+      	//创建了一个循环
+				requestAnimationFrame( animate );
+				//这一段代码将在每一帧时被渲染时调用（正常情况下是60次/秒）
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
